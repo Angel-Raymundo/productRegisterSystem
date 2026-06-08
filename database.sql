@@ -88,3 +88,50 @@ INSERT INTO tbl_cat_graphCards (graphName) VALUES
 ('NVIDIA GeForce GTX 1660 Super');
 
 show tables;
+
+
+-- ---------------Stored Procedures -------------------------
+-- ---------------Prueba----------------------------
+
+CREATE DEFINER=root@localhost PROCEDURE sp_addPersona(
+_PersonaNombre varchar(100)
+)
+BEGIN
+	insert into tbl_ope_persona values(null,_PersonaNombre);
+    SELECT * FROM tbl_ope_persona 
+	ORDER BY PersonaId DESC 
+	LIMIT 1;
+END
+
+
+CREATE DEFINER=root@localhost PROCEDURE sp_getPersonas(
+)
+BEGIN
+    SELECT * FROM tbl_ope_persona 
+	ORDER BY PersonaId asc;
+END
+
+-- -----------------Store----------------------------
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getBrands`(
+)
+BEGIN
+    SELECT * FROM tbl_cat_brands
+	ORDER BY idBrand asc;
+END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getCpus`(
+)
+BEGIN
+    SELECT * FROM tbl_cat_cpus
+	ORDER BY idCpu asc;
+END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getGraphCards`(
+)
+BEGIN
+    SELECT * FROM tbl_cat_graphCards
+	ORDER BY idGraphCard asc;
+END

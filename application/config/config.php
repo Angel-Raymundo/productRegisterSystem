@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/demo/';
+$config['base_url'] = 'http://localhost/productRegisterSystem/';
+ini_set('error_reporting', E_ALL & ~E_DEPRECATED);
 
 /*
 |--------------------------------------------------------------------------
@@ -531,4 +532,4 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-ini_set('error_reporting', E_ALL & ~E_DEPRECATED);
+
