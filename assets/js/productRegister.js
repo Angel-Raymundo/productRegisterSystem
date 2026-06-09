@@ -1,6 +1,12 @@
 $(document).ready(function () {
+	$("#createRam").hide();
+	$("#slctRam").hide();
+	$("#createDisk").hide();
+	$("#slctDisk").hide();
+	$("#addDisk").hide();
 	getBrands();
-    getCpus();
+	getCpus();
+	getGraphCards();
 });
 
 function getBrands() {
@@ -37,14 +43,90 @@ function getCpus() {
 		success: function (response) {
 			console.log(response);
 
-			// const options = response.map(
-			// 	(item) => `<option value="${item.idBrand}">${item.brandName}</option>`,
-			// );
+			const options = response.map(
+				(item) => `<option value="${item.idCpu}">${item.cpuName}</option>`,
+			);
 
-			// $select.append(options.join(""));
+			$select.append(options.join(""));
 		},
 		error: function (xhr, status, error) {
-			console.error("Error al obtener marcas:", error);
+			console.error("Error al obtener CPUs:", error);
 		},
 	});
 }
+
+function getGraphCards() {
+	const $select = $("#slctGraph");
+
+	$.ajax({
+		url: `${base_url}products/ProductSystem/getGraphCards`,
+		type: "POST",
+		dataType: "json",
+
+		success: function (response) {
+			console.log(response);
+
+			const options = response.map(
+				(item) => `<option value="${item.idGraphCard}">${item.graphName}</option>`,
+			);
+
+			$select.append(options.join(""));
+		},
+		error: function (xhr, status, error) {
+			console.error("Error al obtener CPUs:", error);
+		},
+	});
+}
+
+
+$("#addDisk").on('click', function () {
+	var val = $("#slctDisk").val();
+	$("#disks").append(`<label">${val}</label>`)
+
+	var diskNumber = parseInt($("#diskNumber").val());
+	var disks = $("#disks").children().length;
+
+	if (diskNumber == disks) {
+		$("#addDisk").hide();
+	}
+});
+
+
+$("#ramOptions").on('change', function () {
+	var opt = parseInt($(this).val());
+
+	if (opt == 1) {
+		$("#slctRam").show();
+		$("#createRam").hide();
+
+	}
+
+	if (opt == 2) {
+		$("#slctRam").hide();
+		$("#createRam").show();
+
+	}
+
+});
+
+$("#diskOptions").on('change', function () {
+	var opt = parseInt($(this).val());
+	console.log("Discoooooooooooos", opt)
+	var diskNumber = parseInt($("#diskNumber").val());
+	var disks = $("#disks").children().length;
+
+	if (diskNumber != disks) {
+		$("#addDisk").show();
+	}
+
+	if (opt == 1) {
+		$("#slctDisk").show();
+		$("#createDisk").hide();
+	}
+
+	if (opt == 2) {
+		$("#slctDisk").hide();
+		$("#createDisk").show();
+	}
+
+});

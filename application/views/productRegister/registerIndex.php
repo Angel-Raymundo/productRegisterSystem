@@ -24,6 +24,35 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <select name="graphCards" id="slctGraph">
             <option value="default" disabled selected>--- Select a Graph Card ---</option>
         </select>
+        <select name="rams" id="slctRam">
+            <option value="default" disabled selected>--- Select a Ram Size ---</option>
+        </select>
+        <select name="disks" id="slctDisk">
+            <option value="default" disabled selected>--- Select a Disk ---</option>
+        </select>
+        <button id="addDisk">Add Disk</button>
+
+        <div>
+            <label>Ram</label>
+            <select name="ramOptions" id="ramOptions">
+            <option value="default" disabled selected>--- Select an Option ---</option>
+            <option value="1">Choose an existing RAM</option>
+            <option value="2">Create new RAM</option>
+            </select>
+            <input type="text" name="createRam" id="createRam" placeholder="Enter RAM size">
+        </div>
+
+        <div>
+            <label>Hard Disk</label>
+            <input type="text" name="diskNumber" id="diskNumber" placeholder="Enter number of hard drives">
+            <select name="diskOptions" id="diskOptions">
+            <option value="default" disabled selected>--- Select an Option ---</option>
+            <option value="1">Choose an existing Disk</option>
+            <option value="2">Create new Disk</option>
+            </select>
+            <div id="disks"></div>
+        </div>
+
     </div>
 
     <script src="<?php echo base_url(); ?>libraries/sweetalert2/dist/sweetalert2.all.min.js"></script>
