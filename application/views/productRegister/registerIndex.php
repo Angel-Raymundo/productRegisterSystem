@@ -30,16 +30,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <select name="disks" id="slctDisk">
             <option value="default" disabled selected>--- Select a Disk ---</option>
         </select>
-        <button id="btnAddDisk">Add Disk</button>
 
         <div>
             <label>Ram</label>
-            <select name="ramOptions" id="ramOptions">
+            <select name="slctRamOptions" id="slctRamOptions">
             <option value="default" disabled selected>--- Select an Option ---</option>
             <option value="1">Choose an existing RAM</option>
             <option value="2">Specify new RAM size</option>
             </select>
             <input type="text" name="createRam" id="createRam" placeholder="Enter RAM size">
+            <button id="btnAddRam">Add RAM memory</button>
         </div>
 
         <div>
@@ -51,10 +51,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <option value="2">Create new Disk</option>
             </select>
             <input type="text" name="createDisk" id="createDisk" placeholder="Enter disk storage">
-            <div id="disks"></div>
+            <button id="btnAddDisk">Add Disk</button>
         </div>
 
     </div>
+    <table id="tblNewPC">
+        <tr>
+            <td>Brand</td>
+            <td>CPU</td>
+            <td>Graph Card</td>
+            <td>RAM</td>
+            <td>Hard Disk/s</td>
+        </tr>
+        <tr>
+            <td id="tdBrand"></td>
+            <td id="tdCpu"></td>
+            <td id="tdGraph"></td>
+            <td id="tdRam"></td>
+            <td id="tdDisk"></td>
+        </tr>
+    </table>
 
     <script src="<?php echo base_url(); ?>libraries/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="<?php echo base_url(); ?>libraries/jquery/jquery.js"></script>

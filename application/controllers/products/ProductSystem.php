@@ -68,4 +68,39 @@ class ProductSystem extends CI_Controller
 
         echo json_encode($registerResult);
     }
+
+    public function getPCs()
+    {
+        $this->load->model('productStore/PCs_Model');
+
+        $registerResult = $this->PCs_Model->getPCs();
+
+        echo json_encode($registerResult);
+    }
+
+    public function addPC()
+    {
+        $pcName = $this->input->post("pcName");
+        $pcBrand = $this->input->post("pcBrand");
+        $pcGraph = $this->input->post("pcGraph");
+        $pcRam = $this->input->post("pcRam");
+        $pcCpu = $this->input->post("pcCpu");
+        $pcPrice = $this->input->post("pcPrice");
+        $this->load->model('productStore/PCs_Model');
+
+        $registerResult = $this->PCs_Model->addPC($pcName, $pcBrand, $pcGraph, $pcRam, $pcCpu, $pcPrice);
+
+        echo json_encode($registerResult);
+    }
+
+    public function addRelPcDisk()
+    {
+        $IdPC = $this->input->post("idPC");
+        $IdDisk = $this->input->post("idDisk");
+        $this->load->model('productStore/Rel_PC_Disk_Model');
+
+        $registerResult = $this->Rel_PC_Disk_Model->addRelPcDisk($IdPC, $IdDisk);
+
+        echo json_encode($registerResult);
+    }
 }
