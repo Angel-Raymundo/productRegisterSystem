@@ -30,14 +30,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <select name="disks" id="slctDisk">
             <option value="default" disabled selected>--- Select a Disk ---</option>
         </select>
-        <button id="addDisk">Add Disk</button>
+        <button id="btnAddDisk">Add Disk</button>
 
         <div>
             <label>Ram</label>
             <select name="ramOptions" id="ramOptions">
             <option value="default" disabled selected>--- Select an Option ---</option>
             <option value="1">Choose an existing RAM</option>
-            <option value="2">Create new RAM</option>
+            <option value="2">Specify new RAM size</option>
             </select>
             <input type="text" name="createRam" id="createRam" placeholder="Enter RAM size">
         </div>
@@ -45,11 +45,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div>
             <label>Hard Disk</label>
             <input type="text" name="diskNumber" id="diskNumber" placeholder="Enter number of hard drives">
-            <select name="diskOptions" id="diskOptions">
+            <select name="slctDiskOptions" id="slctDiskOptions">
             <option value="default" disabled selected>--- Select an Option ---</option>
             <option value="1">Choose an existing Disk</option>
             <option value="2">Create new Disk</option>
             </select>
+            <input type="text" name="createDisk" id="createDisk" placeholder="Enter disk storage">
             <div id="disks"></div>
         </div>
 

@@ -40,11 +40,31 @@ class ProductSystem extends CI_Controller
         echo json_encode($registerResult);
     }
 
+    public function addRamSize()
+    {
+        $ramSize = $this->input->post("ramSize");
+        $this->load->model('productStore/RamMemories_Model');
+
+        $registerResult = $this->RamMemories_Model->addRam($ramSize);
+
+        echo json_encode($registerResult);
+    }
+
     public function getDisks()
     {
         $this->load->model('productStore/HardDisks_Model');
 
         $registerResult = $this->HardDisks_Model->getDisks();
+
+        echo json_encode($registerResult);
+    }
+
+    public function addDiskStorage()
+    {
+        $diskStorage = $this->input->post("diskStorage");
+        $this->load->model('productStore/HardDisks_Model');
+
+        $registerResult = $this->HardDisks_Model->addDisk($diskStorage);
 
         echo json_encode($registerResult);
     }

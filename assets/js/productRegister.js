@@ -3,7 +3,7 @@ $(document).ready(function () {
 	$("#slctRam").hide();
 	$("#createDisk").hide();
 	$("#slctDisk").hide();
-	$("#addDisk").hide();
+	$("#btnAddDisk").hide();
 	getBrands();
 	getCpus();
 	getGraphCards();
@@ -78,20 +78,6 @@ function getGraphCards() {
 	});
 }
 
-
-$("#addDisk").on('click', function () {
-	var val = $("#slctDisk").val();
-	$("#disks").append(`<label">${val}</label>`)
-
-	var diskNumber = parseInt($("#diskNumber").val());
-	var disks = $("#disks").children().length;
-
-	if (diskNumber == disks) {
-		$("#addDisk").hide();
-	}
-});
-
-
 $("#ramOptions").on('change', function () {
 	var opt = parseInt($(this).val());
 
@@ -109,14 +95,14 @@ $("#ramOptions").on('change', function () {
 
 });
 
-$("#diskOptions").on('change', function () {
+$("#slctDiskOptions").on('change', function () {
 	var opt = parseInt($(this).val());
 	console.log("Discoooooooooooos", opt)
 	var diskNumber = parseInt($("#diskNumber").val());
 	var disks = $("#disks").children().length;
 
 	if (diskNumber != disks) {
-		$("#addDisk").show();
+		$("#btnAddDisk").show();
 	}
 
 	if (opt == 1) {
@@ -129,4 +115,27 @@ $("#diskOptions").on('change', function () {
 		$("#createDisk").show();
 	}
 
+});
+
+$("#btnAddDisk").on('click', function () {
+	var opt = parseInt($("#slctDiskOptions").val());
+
+if (opt == 1) {
+	var val = $("#slctDisk").val();
+		$("#disks").append(`<label">${val}</label>`)
+	}
+
+	if (opt == 2) {
+		var val = $("#createDisk").val();
+		$("#disks").append(`<label">${val}</label>`)
+	}
+
+	
+
+	var diskNumber = parseInt($("#diskNumber").val());
+	var disks = $("#disks").children().length;
+
+	if (diskNumber == disks) {
+		$("#btnAddDisk").hide();
+	}
 });
