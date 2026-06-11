@@ -185,15 +185,14 @@ BEGIN
 	ORDER BY idRam asc;
 END
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getPCs`(
-)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getPCs`()
 BEGIN
-    SELECT 
+    SELECT
         c.idComputer,
         c.computerName,
         b.brandName,
         g.graphName,
-        r.size AS ramSize,
+        r.size        AS ramSize,
         cpu.cpuName,
         cpu.cores,
         c.price,
@@ -202,28 +201,30 @@ BEGIN
         d.idDisk,
         d.diskStorage
     FROM tbl_ope_computers c
-    INNER JOIN tbl_cat_brands b ON c.fk_idBrand = b.idBrand
-    INNER JOIN tbl_cat_graphCards g ON c.fk_idGraphCard = g.idGraphCard
-    INNER JOIN tbl_cat_ramMemories r ON c.fk_idRam = r.idRam
-    INNER JOIN tbl_cat_cpus cpu ON c.fk_idCpu = cpu.idCpu
-    LEFT JOIN tbl_rel_computer_disks cd ON c.idComputer = cd.fk_idComputer
-    LEFT JOIN tbl_cat_hardDisks d ON cd.fk_idDisk = d.idDisk
+    INNER JOIN tbl_cat_brands       b   ON c.fk_idBrand    = b.idBrand
+    INNER JOIN tbl_cat_graphCards   g   ON c.fk_idGraphCard = g.idGraphCard
+    INNER JOIN tbl_cat_ramMemories  r   ON c.fk_idRam      = r.idRam
+    INNER JOIN tbl_cat_cpus         cpu ON c.fk_idCpu      = cpu.idCpu
+    LEFT  JOIN tbl_rel_computer_disks cd ON c.idComputer   = cd.fk_idComputer
+    LEFT  JOIN tbl_cat_hardDisks    d   ON cd.fk_idDisk    = d.idDisk
+    WHERE c.computerStatus = 1          -- Solo registros activos
     ORDER BY c.idComputer;
-END
+END;
 
-CCREATE DEFINER=`root`@`localhost` PROCEDURE `sp_addPC`(
-    _Name VARCHAR(70),
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_addPC`(
+    _Name    VARCHAR(70),
     _IdBrand INT,
     _IdGraph INT,
-    _IdRam INT,
-    _IdCpu INT,
-    _Price FLOAT
+    _IdRam   INT,
+    _IdCpu   INT,
+    _Price   FLOAT
 )
 BEGIN
-    INSERT INTO tbl_ope_computers 
-    (computerName, fk_idBrand, fk_idGraphCard, fk_idRam, fk_idCpu, price, computerStatus)
-    VALUES (_Name, _IdBrand, _IdGraph, _IdRam, _IdCpu, _Price, 1);
-
+    INSERT INTO tbl_ope_computers
+        (computerName, fk_idBrand, fk_idGraphCard, fk_idRam, fk_idCpu, price, computerStatus)
+    VALUES
+        (_Name, _IdBrand, _IdGraph, _IdRam, _IdCpu, _Price, 1);
+ 
     SELECT LAST_INSERT_ID() AS idComputer;
 END;
 
@@ -236,4 +237,48 @@ BEGIN
     VALUES (_IdPC, _IdDisk);
 
     SELECT LAST_INSERT_ID() AS idRelation;
+END;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_updatePC`(
+    _IdComputer INT,
+    _Name       VARCHAR(70),
+    _IdBrand    INT,
+    _IdGraph    INT,
+    _IdRam      INT,
+    _IdCpu      INT,
+    _Price      FLOAT
+)
+BEGIN
+    UPDATE tbl_ope_computers
+    SET
+        computerName   = _Name,
+        fk_idBrand     = _IdBrand,
+        fk_idGraphCard = _IdGraph,
+        fk_idRam       = _IdRam,
+        fk_idCpu       = _IdCpu,
+        price          = _Price
+    WHERE idComputer = _IdComputer;
+ 
+    SELECT ROW_COUNT() AS affectedRows;
+END;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deletePC`(
+    _IdComputer INT
+)
+BEGIN
+    UPDATE tbl_ope_computers
+    SET computerStatus = 0
+    WHERE idComputer = _IdComputer;
+ 
+    SELECT ROW_COUNT() AS affectedRows;
+END;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteRelPcDisk`(
+    _IdPC INT
+)
+BEGIN
+    DELETE FROM tbl_rel_computer_disks
+    WHERE fk_idComputer = _IdPC;
+ 
+    SELECT ROW_COUNT() AS affectedRows;
 END;
