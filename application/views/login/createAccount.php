@@ -94,5 +94,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
         </div>
     </div>
+    <script src="<?php echo base_url(); ?>libraries/jquery/jquery.js"></script>
+    <script src="<?php echo base_url(); ?>libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo base_url(); ?>libraries/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/login/createAccount.js"></script>
 </body>
 </html>
