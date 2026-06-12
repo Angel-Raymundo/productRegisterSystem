@@ -100,6 +100,23 @@ INSERT INTO tbl_cat_graphCards (graphName) VALUES
 
 show tables;
 
+-- ---------------------------------Login------------------------------------
+
+create table tbl_cat_userTypes (
+idUserType INT AUTO_INCREMENT PRIMARY KEY,
+userType varchar(15) not null
+);
+
+insert into tbl_cat_userTypes(userType) values ("admin"),("client");
+
+create table tbl_ope_users (
+idUser INT AUTO_INCREMENT PRIMARY KEY,
+userName varchar(45) not null,
+userEmail varchar(60) not null,
+userPass varchar(64) not null,
+fk_idUserType INT NOT NULL,
+foreign key (fk_idUserType) references tbl_cat_userTypes(idUserType)
+);
 
 -- ---------------Stored Procedures -------------------------
 -- ---------------Prueba----------------------------
@@ -282,3 +299,18 @@ BEGIN
  
     SELECT ROW_COUNT() AS affectedRows;
 END;
+
+-- -----------------Login----------------------------
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_addUser`(
+_UserName varchar(45),
+_Email varchar(60),
+_UserPass varchar(64),
+_IdUserType int
+)
+BEGIN
+	insert into tbl_ope_users values(null,_UserName, _Email, SHA2(_UserPass, 256), _IdUserType);
+    SELECT * FROM tbl_ope_users 
+	ORDER BY idUser DESC 
+	LIMIT 1;
+END
