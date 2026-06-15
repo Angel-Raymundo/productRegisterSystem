@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class ProductSystem extends CI_Controller
+class ProductSystem extends MY_Controller
 {
 
     public function getBrands()

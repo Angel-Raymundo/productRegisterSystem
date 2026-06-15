@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ejercicios extends CI_Controller {
+class Ejercicios extends MY_Controller {
 
 	/*public function index()
 	{

@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
     <link rel="stylesheet" href="<?php echo base_url(); ?>libraries/bootstrap/css/bootstrap.min.css">
+    <script>
+        var base_url = "<?php echo base_url(); ?>";
+    </script>
     <style>
         body {
             min-height: 100vh;
@@ -87,7 +90,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <label for="inptPassConfirm">Confirm Password</label>
                                 <input type="password" class="form-control" name="inptPassConfirm" id="inptPassConfirm" placeholder="Type your password again">
                             </div>
-                            <button type="submit" id="btnCreate" class="btn btn-create btn-primary btn-block mt-3">Create account</button>
+                            <button type="button" id="btnCreate" class="btn btn-create btn-primary btn-block mt-3">Create account</button>
                         </form>
                     </div>
                 </div>

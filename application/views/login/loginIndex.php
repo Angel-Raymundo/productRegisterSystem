@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="<?php echo base_url(); ?>libraries/bootstrap/css/bootstrap.min.css">
+      <script>
+        var base_url = "<?php echo base_url(); ?>";
+    </script>
     <style>
         body {
             min-height: 100vh;

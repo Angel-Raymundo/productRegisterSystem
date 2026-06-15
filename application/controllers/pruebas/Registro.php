@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Registro extends CI_Controller {
+class Registro extends MY_Controller {
 
 	public function RegistroNombre(){
         $nombre = $this->input->post("nombrePersona");

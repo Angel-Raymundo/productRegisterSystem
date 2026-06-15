@@ -314,3 +314,24 @@ BEGIN
 	ORDER BY idUser DESC 
 	LIMIT 1;
 END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getUsers`(
+_UserName varchar(45),
+_UserPass varchar(64)
+)
+BEGIN
+   SELECT * 
+	FROM tbl_ope_users 
+	WHERE userName = _UserName 
+	AND userPass = SHA2(_UserPass, 256);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_userExists`(
+    _UserName VARCHAR(45),
+    _Email VARCHAR(60)
+)
+BEGIN
+    SELECT COUNT(*) as total 
+    FROM tbl_ope_users 
+    WHERE userName = _UserName OR userEmail = _Email;
+END
